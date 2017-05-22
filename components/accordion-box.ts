@@ -7,6 +7,7 @@ import { Component, Input } from '@angular/core'
 
 export class AccordionBox {
 	@Input() accordionTitle;
+	@Input() accordionExpand: boolean;
 	@Input() scrollToTop: string;
 	
 	private title;
@@ -15,7 +16,13 @@ export class AccordionBox {
 	constructor() { }
 	
 	ngOnInit(){
-	this.title = this.accordionTitle;
+		this.title = this.accordionTitle;
+		//We want expanded == true if accordionExpand isn't undefined, and if it is true.
+		if (typeof this.accordionExpand === 'undefined') {
+			this.expanded = false;
+		} else {
+			this.expanded = this.accordionExpand;
+		}
 	}
 	
 	onClick(event){
